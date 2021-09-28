@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {Formik, Field} from 'formik';
 
 function AddGoodsForm(props){
-  // console.log(props.goods)
+  let titles = props.goods.map(item => item.title);
+  let [validateTitle, setValidateTitle] = useState(false);
     return (
         <div className="addMeal_screen">
           <div className="addMeal_block">
@@ -16,12 +17,13 @@ function AddGoodsForm(props){
                 image: ''
               }}
               onSubmit={ (value) => {
-                if(value.name && value.price && value.description){
+                if(!titles.includes(value.name) && value.name && value.price && value.description){
                   props.addNewMealForm(value.name, value.price, value.description, value.image);
                   props.cancelAddNewMeal();
                 }
               }}
               validate={(value) => {
+                setValidateTitle(titles.includes(value.name));
               }}
             >
             {({values, handleSubmit, handleChange, resetForm}) => (
@@ -31,7 +33,9 @@ function AddGoodsForm(props){
                   values={values.name} 
                   onChange={handleChange} 
                   type="text" 
-                  placeholder="Name" />
+                  placeholder="Name" 
+                  className={validateTitle ? "addMeal_errorValidateTitle" : ''}
+                  /><div className="addMeal_errorValidateTitle__text">{validateTitle ? 'this name already exists' : ''}</div>
                 <Field 
                   name='price' 
                   values={values.price} 

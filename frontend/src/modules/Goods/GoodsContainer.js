@@ -34,7 +34,7 @@ function GoodsApiContainer(props) {
 
   return (
     <>
-    <Header addNewMealButton={addNewMealButton} route={'goods'}/>
+    <Header addNewMealButton={addNewMealButton}/>
 
     {addMeal && <AddGoodsForm 
       goods={props.goods}

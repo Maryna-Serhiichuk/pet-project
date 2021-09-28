@@ -1,4 +1,5 @@
 import logo from './../../resources/images/002.jpg';
+import { Route } from 'react-router-dom';
 
 function Header(props) {
   return (
@@ -13,12 +14,21 @@ function Header(props) {
           </div>
         </div>
 
-        {props.route === 'goods' ? <div className="addHotdog_button">
-          <button onClick={props.addNewMealButton}>Add hot-dog</button>
-        </div> : null}
+        <Route 
+          path='/goods'
+          render={ () => <AddFoodButton {...props}/> }/>
+
       </header>
     </>
   );
+}
+
+function AddFoodButton(props){
+  return (
+    <div className="addHotdog_button">
+      <button onClick={props.addNewMealButton}>Add hot-dog</button>
+    </div>
+  )
 }
 
 export default Header;

@@ -239,14 +239,13 @@ header{
     }
   }
 }
-
-
-
-
-
-
-
-
+.addMeal_errorValidateTitle{
+  border: 1px solid red !important;
+  &__text{
+    color: red;
+    font-size: 12px;
+  }
+}
 
 
 
