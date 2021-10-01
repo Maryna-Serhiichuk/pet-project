@@ -32,7 +32,7 @@ app.route('/goods')
 function getGoods(req, res){
     conn.query(`SELECT * FROM ${dbNameTable}`, (err, result, field) => {
         let content = JSON.stringify(result);
-        res.send(content);
+        res.status(200).send(content);
     })
 }
 
@@ -45,7 +45,7 @@ function addNewGoods(req, res){
         let result = JSON.parse(body);
         conn.query(`INSERT INTO ${dbNameTable} (title, price, info, image) VALUES ('${result.title}', '${result.price}', '${result.info}', '${result.image}');`, (err, result, field) => {
             console.log(err)
-            res.send();
+            res.status(200).send();
         })
     })
 }
@@ -59,7 +59,7 @@ function updateGoods(req, res){
         let result = JSON.parse(body);
 
         conn.query(`UPDATE ${dbNameTable} SET title = '${result.title}', price = ${result.price}, info = '${result.info}', image = '${result.image}' WHERE id = ${result.id}`, (err, result, field) => {
-            res.send();
+            res.status(200).send();
         })
     })
 }
@@ -68,7 +68,7 @@ function deleteGoods(req, res){
     let urlInfo = url.parse(req.url, true);
 
     conn.query(`DELETE FROM ${dbNameTable} WHERE id = ${urlInfo.query.delete}`, (err, result, field) => {
-        res.send();
+        res.status(200).send();
     })
 }
 
